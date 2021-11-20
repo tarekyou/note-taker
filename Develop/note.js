@@ -12,5 +12,22 @@ function saveNotes(body, notes) {
     return note;
 };
 
+function deleteById(id, notes) {
+    const result = notes.findIndex(note => note.id === id)[0];
+    const returnNewArr = notes.splice(result, 1)
+    
+    
+    fs.writeFileSync(
+        path.join(__dirname, '../db/db.json'),
+        JSON.stringify({ notes }, null, 2)
+    )
 
-module.exports = { saveNotes };
+    return returnNewArr 
+
+
+    // return result;
+  }
+
+
+
+module.exports = { saveNotes, deleteById };
